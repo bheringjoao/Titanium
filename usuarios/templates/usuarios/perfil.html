@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{% block title %} Perfil {% endblock %}</title>
+
+    <div class="row">
+        <div class="col-sm">
+            <h1>Personagens</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            {% if chars %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Vocação</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Mundo</th>
+                            <th scope="col" class="col-md-auto">Ações</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        {% for c in chars %}
+                            <tr>
+                                <th scope="row">{{ c.name }}</th>
+                                <td>{{ c.vocation.name }}</td>
+                                <td>{{ c.level }}</td>
+                                <td>{{ c.world.name }}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{% url "usuarios:delete_character" c.id %}" class="btn btn-secondary btn-sm btn-danger">Excluir</a>
+                                        <a href="{% url "usuarios:update_character" c.id %}" class="btn btn-secondary btn-sm btn-secondary">Editar</a>
+                                        <a href="{% url "usuarios:search_event" c.id %}"     class="btn btn-secondary btn-sm btn-success">Inscrever</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                  </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-between ">
+        <div class="col-4 pull-right">
+            <a href="{% url "usuarios:create_character" %}" class="btn btn-dark">Novo</a>
+        </div>
+    </div>
+
+{% endblock %}

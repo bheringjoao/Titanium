@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{% block title %} Evento {% endblock %}</title>
+
+    <div class="row">
+        <div class="col-sm">
+            <h1>Evento</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form-signin" method="post">
+                {% csrf_token %}
+                <h2 class="form-signin-heading">{{ event.name }}</h2>
+                <input type="hidden" name="id_evento" value="{{ event.id }}" />
+                    {% if event.slots %}
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Vocação requerida</th>
+                                    <th scope="col">Personagem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in event.slots %}
+                                    <tr>
+                                        <input type="hidden" name="slot_id[]" value="{{ s.id }}"/>
+                                        <th scope="row">{{ s.required_vocation.name }}</th>
+                                            {% if s.character and s.character.user.id != user.id %}
+                                                <td>{{ s.character.name }}</td>
+                                            {% else %}
+                                            <td>
+                                                {% if chars %}
+                                                <select name="character[]" class=custom-select form-control">
+                                                    <option value="0">---------</option>
+                                                    {% for c in chars %}
+                                                        <option value="{{ c.id }}">{{ c.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                <button class="btn btn-dark btn-primary btn-block" type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

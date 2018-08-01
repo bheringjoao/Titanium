@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{% block title %} Personagem {% endblock %}</title>
+
+    <form class="form-signin" method="post">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">{{ page_title }} Personagem</h1>
+
+            {{ form }}
+
+        </br>
+        <button class="btn btn-dark btn-primary btn-block" type="submit">Salvar</button>
+    </form>
+{% endblock %}

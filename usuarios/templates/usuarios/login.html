@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{% block title %} Login {% endblock %}</title>
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Fluid jumbotron</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <form action="{% url "usuarios:login" %}" class="form-signin" method="post">
+                {% csrf_token %}
+                <h2 class="form-signin-heading">Login</h2>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="text" name="username" class="form-control" placeholder="Login" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="password" name="password" class="form-control" placeholder="Senha" />
+                    </div>
+                </div>
+                <button class="btn btn-dark btn-primary btn-block" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<title>{% block title %} Eventos {% endblock %}</title>
+{% block content %}
+    <div class="row">
+        <div class="col-sm">
+            <h1>Eventos</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% if events %}
+            {% for e in events %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ e.name }}</h5>
+                            <p class="card-text">Min Level: {{ e.min_level }}</p>
+                            <p class="card-text">Max Level: {{ e.max_level }}</p>
+                            <a href="{% url "usuarios:edit_event" e.id %}" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </br>
+    <div class="row justify-content-between ">
+        <div class="col-4 pull-right">
+            <a href="#" class="btn btn-dark">Novo</a>
+        </div>
+    </div>
+{% endblock %}
